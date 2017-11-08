@@ -14,7 +14,7 @@ module OEmbed
       found = false
       remaining_redirects = options[:max_redirects] ? options[:max_redirects].to_i : 4
       until found
-        http = Net::HTTP.new(uri.host, uri.port)
+        http = Net::HTTP.new(uri.host, uri.port, options[:proxy_address], options[:proxy_port])
         http.use_ssl = uri.scheme == 'https'
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http.read_timeout = http.open_timeout = options[:timeout] if options[:timeout]
